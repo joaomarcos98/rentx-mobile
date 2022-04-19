@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '../../components/Button';
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
@@ -45,20 +46,23 @@ export const CarDetails = () => {
                 </Styled.Details>
 
                 <Styled.Accessories>
-                    <Accessory name="380Km/h" icon={speedSvg}/>
-                    <Accessory name="3.2s" icon={accelerationSvg}/>
-                    <Accessory name="800 HP" icon={force}/>
-                    <Accessory name="Gasolina" icon={gasolineSvg}/>
-                    <Accessory name="auto" icon={exchangeSvg}/>
-                    <Accessory name="2 pessoas" icon={peopleSvg}/>
+                    <Accessory name="380Km/h" icon={speedSvg} />
+                    <Accessory name="3.2s" icon={accelerationSvg} />
+                    <Accessory name="800 HP" icon={force} />
+                    <Accessory name="Gasolina" icon={gasolineSvg} />
+                    <Accessory name="auto" icon={exchangeSvg} />
+                    <Accessory name="2 pessoas" icon={peopleSvg} />
                 </Styled.Accessories>
 
-                    <Styled.About>
-                        Carrin bacana do meccheferson doidera maravilhosa opa fion n sei oq mas ta otimo revoada do tubarão
-                    </Styled.About>
-
+                <Styled.About>
+                    Carrin bacana do meccheferson doidera maravilhosa opa fion n sei oq mas ta otimo revoada do tubarão
+                </Styled.About>
 
             </Styled.Content>
+
+                <Styled.Footer>
+                    <Button title="Confirmar"/>
+                </Styled.Footer>
 
         </Styled.Container>
     );
