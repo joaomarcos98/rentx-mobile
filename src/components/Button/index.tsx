@@ -5,7 +5,6 @@ import * as Styled from './styles';
 
 type ButtonProps = {
     title: string;
-    // onPress(): void
 }
 
 export const Button = ({

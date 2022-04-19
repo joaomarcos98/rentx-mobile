@@ -7,6 +7,7 @@ import ArrowSvg from "../../assets/arrow.svg"
 import * as Styled from './styles';
 import { StatusBar } from 'react-native';
 import { Button } from '../../components/Button';
+import { Calendar } from '../../components/Calendar';
 
 
 export const Scheduling = () => {
@@ -19,7 +20,7 @@ export const Scheduling = () => {
                 <StatusBar
                     barStyle="light-content"
                     translucent
-                    backgroundColor="transparent"
+                    backgroundColor={theme.colors.header}
                 />
 
                 <BackButton
@@ -54,7 +55,7 @@ export const Scheduling = () => {
             </Styled.Header>
 
             <Styled.Content>
-
+                <Calendar />
             </Styled.Content>
 
             <Styled.Footer>

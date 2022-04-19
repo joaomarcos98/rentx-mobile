@@ -20,8 +20,6 @@ export const Header = styled.View`
 
     justify-content: center;
     padding: 25px;
-
-    margin-top: ${getStatusBarHeight() + 30}px;
 `
 
 export const Title = styled.Text`
