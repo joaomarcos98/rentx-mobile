@@ -19,6 +19,8 @@ import { Home } from './screens/Home';
 import { CarDetails } from "./screens/CarDetails";
 import { Scheduling } from './screens/Scheduling';
 import { SchedulingDetails } from './screens/SchedulingDetails';
+import { SchedulingComplete } from './screens/SchedulingComplete';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 export default function App() {
@@ -36,9 +38,11 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <SchedulingDetails />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <SchedulingComplete />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   )
 }
 
