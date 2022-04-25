@@ -8,11 +8,23 @@ import * as Styled from './styles';
 import { StatusBar } from 'react-native';
 import { Button } from '../../components/Button';
 import { Calendar } from '../../components/Calendar';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/types';
+
+
+type SchedulingScreenRouteProp = StackNavigationProp<RootStackParamList, 'Scheduling'>;
 
 
 export const Scheduling = () => {
 
+    const { navigate } = useNavigation<SchedulingScreenRouteProp>()
+
     const theme = useTheme()
+
+    const handleConfirmRental = () => {
+        navigate("SchedulingDetails")
+    }
 
     return (
         <Styled.Container>
@@ -20,7 +32,7 @@ export const Scheduling = () => {
                 <StatusBar
                     barStyle="light-content"
                     translucent
-                    backgroundColor={theme.colors.header}
+                    backgroundColor="transparent"
                 />
 
                 <BackButton
@@ -59,7 +71,7 @@ export const Scheduling = () => {
             </Styled.Content>
 
             <Styled.Footer>
-                <Button title="Confirmar" />
+                <Button title="Confirmar" onPress={handleConfirmRental} />
             </Styled.Footer>
 
         </Styled.Container >

@@ -10,6 +10,7 @@ type DateValueProps = {
 export const Container = styled.View`
     flex: 1;
     background-color: ${({ theme }) => theme.colors.background_secondary};
+    
 `
 
 export const Header = styled.View`
@@ -18,8 +19,7 @@ export const Header = styled.View`
     
     background-color: ${({ theme }) => theme.colors.header};
 
-    justify-content: center;
-    padding: 25px;
+    padding:  25px;
 `
 
 export const Title = styled.Text`
@@ -27,7 +27,7 @@ export const Title = styled.Text`
     font-family: ${({ theme }) => theme.fonts.secondary_600};
     font-size: ${RFValue(34)}px;
 
-    margin-top: 24px;
+    margin-top: 12px;
 `
 
 export const RentalPeriod = styled.View`

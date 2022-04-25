@@ -4,6 +4,7 @@ import * as Styled from './styles';
 import React from 'react';
 import { useTheme } from 'styled-components';
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 /** @name Components */
 import { Button } from '../../components/Button';
@@ -17,8 +18,19 @@ import force from "../../assets/force.svg"
 import gasolineSvg from "../../assets/gasoline.svg"
 import exchangeSvg from "../../assets/exchange.svg"
 import peopleSvg from "../../assets/people.svg"
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/types';
+
+
+type SchedulingDetailsScreenRouteProp = StackNavigationProp<RootStackParamList, 'SchedulingDetails'>;
 
 export const SchedulingDetails = () => {
+
+    const { navigate } = useNavigation<SchedulingDetailsScreenRouteProp>();
+
+    const handleConfirmRental = () => {
+        navigate("SchedulingComplete")
+    }
 
     const theme = useTheme();
 
@@ -114,7 +126,7 @@ export const SchedulingDetails = () => {
             </Styled.Content>
 
             <Styled.Footer>
-                <Button title="Confirmar" />
+                <Button title="Confirmar" onPress={handleConfirmRental} />
             </Styled.Footer>
 
         </Styled.Container>

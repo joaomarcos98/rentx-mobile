@@ -1,9 +1,10 @@
 import React from 'react';
+import { RectButtonProps } from 'react-native-gesture-handler';
 
 import * as Styled from './styles';
 
 
-type ButtonProps = {
+interface ButtonProps extends RectButtonProps {
     title: string;
 }
 

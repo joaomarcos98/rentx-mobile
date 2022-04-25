@@ -17,9 +17,6 @@ export const Calendar = () => {
 
     LocaleConfig.defaultLocale = "pt-br";
 
-    console.log(new Date().toString());
-    
-
     return (
         <CustomCalendar
             renderArrow={(direction) =>

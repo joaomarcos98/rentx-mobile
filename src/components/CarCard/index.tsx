@@ -1,4 +1,5 @@
 import React from 'react';
+import { RectButtonProps } from 'react-native-gesture-handler';
 import GasolineSvg from "../../assets/gasoline.svg";
 
 import * as Styled from './styles';
@@ -14,13 +15,13 @@ type CarData = {
     thumbnail: string;
 }
 
-type CarCardProps = {
+interface CarCardProps extends RectButtonProps {
     data: CarData
 }
 
-export const CarCard = ({ data }: CarCardProps) => {
+export const CarCard = ({ data, ...rest }: CarCardProps) => {
     return (
-        <Styled.Container>
+        <Styled.Container {...rest}>
             <Styled.Details>
                 <Styled.Brand>
                     {data.brand}
@@ -43,7 +44,7 @@ export const CarCard = ({ data }: CarCardProps) => {
                 </Styled.About>
             </Styled.Details>
 
-            <Styled.CarImage source={{ uri: data.thumbnail }} 
+            <Styled.CarImage source={{ uri: data.thumbnail }}
                 resizeMode="contain"
             />
         </Styled.Container>

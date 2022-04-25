@@ -2,6 +2,8 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
+import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   useFonts,
   Inter_400Regular,
@@ -20,7 +22,7 @@ import { CarDetails } from "./screens/CarDetails";
 import { Scheduling } from './screens/Scheduling';
 import { SchedulingDetails } from './screens/SchedulingDetails';
 import { SchedulingComplete } from './screens/SchedulingComplete';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Routes } from './routes';
 
 
 export default function App() {
@@ -40,7 +42,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
-        <SchedulingComplete />
+        <Routes />
       </ThemeProvider>
     </GestureHandlerRootView>
   )

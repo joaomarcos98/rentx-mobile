@@ -1,5 +1,5 @@
 import React from 'react';
-import { useWindowDimensions } from "react-native";
+import { StatusBar, useWindowDimensions } from "react-native";
 
 import DoneSvg from "../../assets/done.svg";
 import LogoSvg from "../../assets/logo_background_gray.svg";
@@ -13,6 +13,11 @@ export const SchedulingComplete = () => {
 
     return (
         <Styled.Container>
+            <StatusBar
+                barStyle='light-content'
+                translucent
+                backgroundColor="transparent"
+            />
             <LogoSvg
                 width={width}
             />
@@ -34,8 +39,8 @@ export const SchedulingComplete = () => {
             </Styled.Content>
 
             <Styled.Footer>
-                <ConfirmButton title="OK" onPress={()=> console.log("opas")
-                }/>
+                <ConfirmButton title="OK" onPress={() => console.log("opas")
+                } />
             </Styled.Footer>
 
         </Styled.Container>

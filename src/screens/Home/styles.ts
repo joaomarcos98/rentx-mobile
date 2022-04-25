@@ -38,4 +38,6 @@ export const CarList = styled.FlatList.attrs({
         padding: 24
     },
     showsVerticalScrollIndicator: false
-})``;
+})`
+    padding-right: 12px;
+`;

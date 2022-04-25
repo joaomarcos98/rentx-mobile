@@ -12,13 +12,29 @@ import exchangeSvg from "../../assets/exchange.svg"
 import peopleSvg from "../../assets/people.svg"
 
 import * as Styled from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/types';
+import { useNavigation } from '@react-navigation/native';
+
+type CarDetailsScreenRouteProp = StackNavigationProp<RootStackParamList, 'CarDetails'>;
 
 export const CarDetails = () => {
+
+    const { navigate, goBack } = useNavigation<CarDetailsScreenRouteProp>();
+
+    const handleConfirmRental = () => {
+        navigate("Scheduling")
+    }
+
+    const handleGoBack = ()=>{
+        goBack()
+    }
+
     return (
         <Styled.Container>
             <Styled.Header>
                 <BackButton
-                    onPress={() => { }}
+                    onPress={handleGoBack}
                 />
             </Styled.Header>
 
@@ -60,9 +76,9 @@ export const CarDetails = () => {
 
             </Styled.Content>
 
-                <Styled.Footer>
-                    <Button title="Confirmar"/>
-                </Styled.Footer>
+            <Styled.Footer>
+                <Button title="Confirmar" onPress={handleConfirmRental } />
+            </Styled.Footer>
 
         </Styled.Container>
     );

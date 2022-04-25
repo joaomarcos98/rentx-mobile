@@ -1,13 +1,21 @@
+import { RouteProp, useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { StatusBar } from "react-native";
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import Logo from "../../assets/logo.svg";
 import { CarCard } from '../../components/CarCard';
+import { RootStackParamList } from "../../routes/types"
 
 import * as Styled from './styles';
 
+
+type HomeScreenRouteProp = StackNavigationProp<RootStackParamList, 'Home'>;
+
 export const Home = () => {
+
+    const { navigate } = useNavigation<HomeScreenRouteProp>()
 
     const carData = {
         brand: "Porsche",
@@ -17,6 +25,10 @@ export const Home = () => {
             price: 340
         },
         thumbnail: "https://pngkit.com/png/full/237-2375888_porsche-panamera-s.png"
+    }
+
+    const handleCarDetails = () => {
+        navigate("CarDetails")
     }
 
     return (
@@ -41,12 +53,11 @@ export const Home = () => {
             <Styled.CarList
                 data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
                 keyExtractor={item => String(item)}
-                renderItem={({ item }) => <CarCard data={carData} />}
+                renderItem={({ item }) =>
+                    <CarCard data={carData} onPress={handleCarDetails} />
+                }
             />
 
-
-            {/* <CarCard data={carData} /> */}
-
         </Styled.Container>
-    );
+    ); handleCarDetails
 }
