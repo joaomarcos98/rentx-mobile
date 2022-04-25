@@ -6,6 +6,7 @@ import * as Styled from './styles';
 
 interface ButtonProps extends RectButtonProps {
     title: string;
+    color?: string;
 }
 
 export const Button = ({

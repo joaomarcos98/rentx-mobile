@@ -122,11 +122,10 @@ export const SchedulingDetails = () => {
                         </Styled.RentalPriceTotal>
                     </Styled.RentalPriceDetails>
                 </Styled.RentalPrice>
-
             </Styled.Content>
 
             <Styled.Footer>
-                <Button title="Confirmar" onPress={handleConfirmRental} />
+                <Button title="Confirmar" color={theme.colors.success} onPress={handleConfirmRental} />
             </Styled.Footer>
 
         </Styled.Container>

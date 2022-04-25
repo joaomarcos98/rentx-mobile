@@ -1,13 +1,26 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { StatusBar, useWindowDimensions } from "react-native";
 
 import DoneSvg from "../../assets/done.svg";
 import LogoSvg from "../../assets/logo_background_gray.svg";
 import { ConfirmButton } from '../../components/ConfirmButton';
+import { RootStackParamList } from '../../routes/types';
 
 import * as Styled from './styles';
 
+
+type SchedulingCompleteScreenRouteProp = StackNavigationProp<RootStackParamList, 'SchedulingComplete'>;
+
 export const SchedulingComplete = () => {
+
+    const { navigate } = useNavigation<SchedulingCompleteScreenRouteProp>();
+
+    const handleConfirmRental = () => {
+        navigate("Home")
+    }
+
 
     const { width } = useWindowDimensions()
 
@@ -39,8 +52,7 @@ export const SchedulingComplete = () => {
             </Styled.Content>
 
             <Styled.Footer>
-                <ConfirmButton title="OK" onPress={() => console.log("opas")
-                } />
+                <ConfirmButton title="OK" onPress={handleConfirmRental} />
             </Styled.Footer>
 
         </Styled.Container>
