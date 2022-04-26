@@ -1,12 +1,15 @@
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from "react-native";
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import Logo from "../../assets/logo.svg";
 import { CarCard } from '../../components/CarCard';
+import { Loading } from '../../components/Loading';
+import { CarDTO } from '../../dto/CarDTO';
 import { RootStackParamList } from "../../routes/types"
+import { api } from '../../services/api';
 
 import * as Styled from './styles';
 
@@ -14,6 +17,9 @@ import * as Styled from './styles';
 type HomeScreenRouteProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 export const Home = () => {
+
+    const [cars, setCars] = useState<CarDTO[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { navigate } = useNavigation<HomeScreenRouteProp>()
 
@@ -30,6 +36,21 @@ export const Home = () => {
     const handleCarDetails = () => {
         navigate("CarDetails")
     }
+
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                const response = await api.get("/cars")
+                setCars(response.data)
+                console.log(response);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchCars()
+    }, [])
 
     return (
         <Styled.Container>
@@ -50,14 +71,18 @@ export const Home = () => {
                 </Styled.HeaderContent>
             </Styled.Header>
 
-            <Styled.CarList
-                data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-                keyExtractor={item => String(item)}
-                renderItem={({ item }) =>
-                    <CarCard data={carData} onPress={handleCarDetails} />
-                }
-            />
+            {
+                isLoading
+                    ? <Loading />
+                    : <Styled.CarList
+                        data={cars}
+                        keyExtractor={item => String(item.id)}
+                        renderItem={({ item }) =>
+                            <CarCard data={item} onPress={handleCarDetails} />
+                        }
+                    />
+            }
 
         </Styled.Container>
-    ); handleCarDetails
+    );
 }
