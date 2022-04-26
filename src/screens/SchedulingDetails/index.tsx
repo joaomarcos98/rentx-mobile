@@ -26,10 +26,14 @@ type SchedulingDetailsScreenRouteProp = StackNavigationProp<RootStackParamList, 
 
 export const SchedulingDetails = () => {
 
-    const { navigate } = useNavigation<SchedulingDetailsScreenRouteProp>();
+    const { navigate, goBack } = useNavigation<SchedulingDetailsScreenRouteProp>();
 
     const handleConfirmRental = () => {
         navigate("SchedulingComplete")
+    }
+
+    const handleBack = () => {
+        goBack();
     }
 
     const theme = useTheme();
@@ -38,7 +42,7 @@ export const SchedulingDetails = () => {
         <Styled.Container>
             <Styled.Header>
                 <BackButton
-                    onPress={() => { }}
+                    onPress={handleBack}
                 />
             </Styled.Header>
 

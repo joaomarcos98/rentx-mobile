@@ -1,21 +1,37 @@
 import React from 'react';
-import { Calendar as CustomCalendar, LocaleConfig } from "react-native-calendars";
+import { Calendar as CustomCalendar, LocaleConfig, CalendarProps } from "react-native-calendars";
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from 'styled-components';
 
-export const Calendar = () => {
+import { ptBR } from './localeConfig';
 
-    const theme = useTheme()
 
-    LocaleConfig.locales["pt-br"] = {
-        monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-        monthNameShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-        dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
-        dayNamesShort: ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"],
-        today: "Hoje"
+LocaleConfig.locales["pt-br"] = ptBR;
+LocaleConfig.defaultLocale = "pt-br";
+
+export interface MarkedDateProps {
+    [date: string]: {
+        color: string;
+        textColor: string;
+        disabled?: boolean;
+        disabledTouchEvent?: boolean;
     }
+}
 
-    LocaleConfig.defaultLocale = "pt-br";
+export type DayProps = {
+    dateString: string;
+    day: number;
+    year: number;
+    month: number;
+    timestamp: number;
+}
+
+
+export const Calendar = ({ markedDates, onDayPress }: CalendarProps) => {
+
+    const theme = useTheme();
+
+
 
     return (
         <CustomCalendar
@@ -43,7 +59,7 @@ export const Calendar = () => {
                 textDayFontFamily: theme.fonts.primary_400,
                 textDayHeaderFontFamily: theme.fonts.primary_500,
                 textDayFontSize: 10,
-                textMonthFontFamily: theme.fonts.secondary_600 ,
+                textMonthFontFamily: theme.fonts.secondary_600,
                 textMonthFontSize: 20,
                 monthTextColor: theme.colors.title,
                 arrowStyle: {
@@ -52,8 +68,10 @@ export const Calendar = () => {
             }}
 
             firstDay={1}
-          
-            minDate={"2022-04-19"}
+            minDate={String(new Date())}
+            markingType="period"
+            markedDates={markedDates}
+            onDayPress={onDayPress}
         />
 
     );
