@@ -23,18 +23,8 @@ export const Home = () => {
 
     const { navigate } = useNavigation<HomeScreenRouteProp>()
 
-    const carData = {
-        brand: "Porsche",
-        name: "Panamera",
-        rent: {
-            period: "Ao dia",
-            price: 340
-        },
-        thumbnail: "https://pngkit.com/png/full/237-2375888_porsche-panamera-s.png"
-    }
-
-    const handleCarDetails = () => {
-        navigate("CarDetails")
+    const handleCarDetails = (car: CarDTO) => {
+        navigate("CarDetails", { car })
     }
 
     useEffect(() => {
@@ -78,7 +68,7 @@ export const Home = () => {
                         data={cars}
                         keyExtractor={item => String(item.id)}
                         renderItem={({ item }) =>
-                            <CarCard data={item} onPress={handleCarDetails} />
+                            <CarCard data={item} onPress={() => handleCarDetails(item)} />
                         }
                     />
             }

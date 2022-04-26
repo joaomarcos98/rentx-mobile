@@ -4,31 +4,37 @@ import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 
-import speedSvg from "../../assets/speed.svg"
-import accelerationSvg from "../../assets/acceleration.svg"
-import force from "../../assets/force.svg"
-import gasolineSvg from "../../assets/gasoline.svg"
-import exchangeSvg from "../../assets/exchange.svg"
-import peopleSvg from "../../assets/people.svg"
+
 
 import * as Styled from './styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../routes/types';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CarDTO } from '../../dto/CarDTO';
+import { getAccessoriesIcons } from '../../utils/getAccessoriesIcon';
+
 
 type CarDetailsScreenRouteProp = StackNavigationProp<RootStackParamList, 'CarDetails'>;
+
+type Params = {
+    car: CarDTO
+}
 
 export const CarDetails = () => {
 
     const { navigate, goBack } = useNavigation<CarDetailsScreenRouteProp>();
+    const { params } = useRoute();
+
+    const { car } = params as Params;
 
     const handleConfirmRental = () => {
         navigate("Scheduling")
     }
 
-    const handleGoBack = ()=>{
+    const handleGoBack = () => {
         goBack()
     }
+
 
     return (
         <Styled.Container>
@@ -40,9 +46,7 @@ export const CarDetails = () => {
 
             <Styled.CarImages>
                 <ImageSlider
-                    imagesUrl={[
-                        "https://pngkit.com/png/full/237-2375888_porsche-panamera-s.png"
-                    ]}
+                    imagesUrl={car.photos}
                 />
             </Styled.CarImages>
 
@@ -50,34 +54,37 @@ export const CarDetails = () => {
                 <Styled.Details>
 
                     <Styled.Description>
-                        <Styled.Brand>Audi</Styled.Brand>
-                        <Styled.Name>Rs 5</Styled.Name>
+                        <Styled.Brand>{car.brand}</Styled.Brand>
+                        <Styled.Name>{car.name}</Styled.Name>
                     </Styled.Description>
 
                     <Styled.Rent>
-                        <Styled.Period>Ao dia</Styled.Period>
-                        <Styled.Price>R$ 500</Styled.Price>
+                        <Styled.Period>{car.rent.period}</Styled.Period>
+                        <Styled.Price>R$ {car.rent.price}</Styled.Price>
                     </Styled.Rent>
 
                 </Styled.Details>
 
                 <Styled.Accessories>
-                    <Accessory name="380Km/h" icon={speedSvg} />
-                    <Accessory name="3.2s" icon={accelerationSvg} />
-                    <Accessory name="800 HP" icon={force} />
-                    <Accessory name="Gasolina" icon={gasolineSvg} />
-                    <Accessory name="auto" icon={exchangeSvg} />
-                    <Accessory name="2 pessoas" icon={peopleSvg} />
+                    {
+                        car.accessories.map(accessory => (
+                            <Accessory
+                                key={accessory.type}
+                                name={accessory.name}
+                                icon={getAccessoriesIcons(accessory.type)}
+                            />
+                        ))
+                    }
                 </Styled.Accessories>
 
                 <Styled.About>
-                    Carrin bacana do meccheferson doidera maravilhosa opa fion n sei oq mas ta otimo revoada do tubarão
+                    {car.about}
                 </Styled.About>
 
             </Styled.Content>
 
             <Styled.Footer>
-                <Button title="Confirmar" onPress={handleConfirmRental } />
+                <Button title="Escolher período do aluguel" onPress={handleConfirmRental} />
             </Styled.Footer>
 
         </Styled.Container>
