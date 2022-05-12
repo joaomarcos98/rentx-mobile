@@ -19,5 +19,8 @@ export type RootStackParamList = {
     };
     SchedulingComplete: {
         name: string
+    };
+    MyCars: {
+        name: string
     }
 };

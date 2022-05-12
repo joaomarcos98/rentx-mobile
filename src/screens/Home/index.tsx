@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from "react-native";
 import { RFValue } from 'react-native-responsive-fontsize';
+import { Ionicons } from "@expo/vector-icons";
 
 import Logo from "../../assets/logo.svg";
 import { CarCard } from '../../components/CarCard';
@@ -12,6 +13,7 @@ import { RootStackParamList } from "../../routes/types"
 import { api } from '../../services/api';
 
 import * as Styled from './styles';
+import { useTheme } from 'styled-components';
 
 
 type HomeScreenRouteProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -25,7 +27,13 @@ export const Home = () => {
 
     const handleCarDetails = (car: CarDTO) => {
         navigate("CarDetails", { car })
+    };
+
+    const handleOpenMyCars = () => {
+        navigate("MyCars")
     }
+
+    const theme = useTheme();
 
     useEffect(() => {
         const fetchCars = async () => {
@@ -71,6 +79,14 @@ export const Home = () => {
                         }
                     />
             }
+
+            <Styled.MyCarsButton onPress={handleOpenMyCars}>
+                <Ionicons
+                    name="ios-car-sport"
+                    size={32}
+                    color={theme.colors.shape}
+                />
+            </Styled.MyCarsButton>
 
         </Styled.Container>
     );
