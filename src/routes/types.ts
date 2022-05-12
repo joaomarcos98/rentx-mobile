@@ -11,10 +11,11 @@ export type RootStackParamList = {
         car: CarDTO;
     };
     Scheduling: {
-        name: string
+        car: CarDTO
     };
     SchedulingDetails: {
-        name: string
+        car: CarDTO;
+        dates: string[]
     };
     SchedulingComplete: {
         name: string

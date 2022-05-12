@@ -4,8 +4,6 @@ import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 
-
-
 import * as Styled from './styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../routes/types';
@@ -28,7 +26,7 @@ export const CarDetails = () => {
     const { car } = params as Params;
 
     const handleConfirmRental = () => {
-        navigate("Scheduling")
+        navigate("Scheduling", { car })
     }
 
     const handleGoBack = () => {
