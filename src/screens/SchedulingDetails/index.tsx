@@ -37,10 +37,14 @@ type SchedulingDetailsScreenRouteProp = StackNavigationProp<RootStackParamList, 
 export const SchedulingDetails = () => {
 
     const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { navigate, goBack } = useNavigation<SchedulingDetailsScreenRouteProp>();
 
     const handleConfirmRental = async () => {
+
+        setIsLoading(true)
+
         const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
 
         const unavailable_dates = [
@@ -62,6 +66,9 @@ export const SchedulingDetails = () => {
             .then(() => navigate("SchedulingComplete"))
             .catch(() => {
                 Alert.alert("Não foi possivel agendar")
+            })
+            .finally(() => {
+                setIsLoading(false)
             })
     }
 
@@ -177,7 +184,14 @@ export const SchedulingDetails = () => {
             </Styled.Content>
 
             <Styled.Footer>
-                <Button title="Confirmar" color={theme.colors.success} onPress={handleConfirmRental} />
+                <Button
+                    title="Confirmar"
+                    color={theme.colors.success}
+                    onPress={handleConfirmRental}
+                    isLoading={isLoading}
+                    enabled={!isLoading}
+                    style={{ opacity: isLoading ? .5 : 1 }}
+                />
             </Styled.Footer>
 
         </Styled.Container>
