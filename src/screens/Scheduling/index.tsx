@@ -44,14 +44,10 @@ export const Scheduling = () => {
     const theme = useTheme();
 
     const handleConfirmRental = () => {
-        if(!rentalPeriod.startFormatted || !rentalPeriod.endFormatted){
-            Alert.alert("Selecione o intervalo para alugar")
-        } else {
-            navigate("SchedulingDetails", {
-                car,
-                dates: Object.keys(markedDates)
-            })
-        }
+        navigate("SchedulingDetails", {
+            car,
+            dates: Object.keys(markedDates)
+        })
     };
 
     const handleBack = () => {
@@ -131,7 +127,12 @@ export const Scheduling = () => {
             </Styled.Content>
 
             <Styled.Footer>
-                <Button title="Confirmar" onPress={handleConfirmRental} />
+                <Button
+                    title="Confirmar"
+                    onPress={handleConfirmRental}
+                    enabled={!!rentalPeriod.startFormatted}
+                    style={{ opacity: !!rentalPeriod.startFormatted ? 1 : 0.5 }}
+                />
             </Styled.Footer>
 
         </Styled.Container >
