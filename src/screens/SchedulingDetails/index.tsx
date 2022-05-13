@@ -4,20 +4,14 @@ import * as Styled from './styles';
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { Feather } from "@expo/vector-icons";
-import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 /** @name Components */
 import { Button } from '../../components/Button';
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
-/** @name Svgs */
-import speedSvg from "../../assets/speed.svg"
-import accelerationSvg from "../../assets/acceleration.svg"
-import force from "../../assets/force.svg"
-import gasolineSvg from "../../assets/gasoline.svg"
-import exchangeSvg from "../../assets/exchange.svg"
-import peopleSvg from "../../assets/people.svg"
+
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../routes/types';
 import { CarDTO } from '../../dto/CarDTO';
@@ -53,6 +47,12 @@ export const SchedulingDetails = () => {
             ...schedulesByCar.data.unavailable_dates,
             ...dates
         ];
+
+
+        await api.post(`/schedules_byuser`, {
+            user_id: 1,
+            car
+        })
 
         await api.put(`/schedules_bycars/${car.id}`, {
             id: car.id,
