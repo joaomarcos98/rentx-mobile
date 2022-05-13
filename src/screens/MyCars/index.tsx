@@ -7,14 +7,20 @@ import { BackButton } from "../../components/BackButton";
 import { CarCard } from "../../components/CarCard";
 import { CarDTO } from "../../dto/CarDTO";
 import { RootStackParamList } from "../../routes/types";
+import { AntDesign } from "@expo/vector-icons"
 import { api } from "../../services/api";
 import * as Styled from "./styles";
+import { Loading } from "../../components/Loading";
 
 
 type MyCarsScreenRouteProp = StackNavigationProp<RootStackParamList, 'MyCars'>;
 
 type CarProps = {
-    car: CarDTO
+    id: string;
+    user_id: string;
+    car: CarDTO;
+    startDate: string;
+    endDate: string;
 }
 
 
@@ -27,6 +33,8 @@ export const MyCars = () => {
 
     const theme = useTheme();
 
+    console.log(cars);
+
 
     const handleBack = () => {
         goBack();
@@ -35,7 +43,7 @@ export const MyCars = () => {
     useEffect(() => {
         const fetchCars = async () => {
             try {
-                const response = await api.get("/schedules_byuser?user_id=1`");
+                const response = await api.get("/schedules_byuser?user_id=1");
                 setCars(response.data)
             } catch (err) {
                 console.log(err);
@@ -68,19 +76,42 @@ export const MyCars = () => {
 
             </Styled.Header>
 
-            <Styled.Content>
-                <Styled.Appointments>
-                    <Styled.AppointmentTitle>Agendamentos feitos</Styled.AppointmentTitle>
-                    <Styled.AppointmentQuantity>09</Styled.AppointmentQuantity>
-                </Styled.Appointments>
+            {
+                isLoading
+                    ? <Loading />
+                    : <Styled.Content>
+                        <Styled.Appointments>
+                            <Styled.AppointmentTitle>Agendamentos feitos</Styled.AppointmentTitle>
+                            <Styled.AppointmentQuantity>{cars.length}</Styled.AppointmentQuantity>
+                        </Styled.Appointments>
 
-                <FlatList
-                    data={cars}
-                    keyExtractor={({ car }) => car.id}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => <CarCard data={item.car} />}
-                />
-            </Styled.Content>
+                        <FlatList
+                            data={cars}
+                            keyExtractor={item => item.id}
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={({ item }) => (
+                                <Styled.CarContent>
+                                    <CarCard data={item.car} />
+                                    <Styled.CarFooter>
+                                        <Styled.CarFooterTitle>Período</Styled.CarFooterTitle>
+                                        <Styled.CarFooterPeriod>
+                                            <Styled.CarFooterDate>{item.startDate}</Styled.CarFooterDate>
+                                            <AntDesign
+                                                name="arrowright"
+                                                size={20}
+                                                color={theme.colors.title}
+                                                style={{ marginHorizontal: 10 }}
+                                            />
+                                            <Styled.CarFooterDate>{item.endDate}</Styled.CarFooterDate>
+                                        </Styled.CarFooterPeriod>
+                                    </Styled.CarFooter>
+                                </Styled.CarContent>
+                            )}
+                        />
+                    </Styled.Content>
+            }
+
+
         </Styled.Container>
     )
 }

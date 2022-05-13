@@ -63,7 +63,7 @@ export const Home = () => {
                         width={RFValue(108)}
                     />
                     <Styled.TotalCars>
-                        Total de 12 Carros
+                        {`Total de ${cars.length} Carros`}
                     </Styled.TotalCars>
                 </Styled.HeaderContent>
             </Styled.Header>

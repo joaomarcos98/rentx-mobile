@@ -48,10 +48,11 @@ export const SchedulingDetails = () => {
             ...dates
         ];
 
-
         await api.post(`/schedules_byuser`, {
             user_id: 1,
-            car
+            car,
+            startDate: rentalPeriod.start,
+            endDate: rentalPeriod.end
         })
 
         await api.put(`/schedules_bycars/${car.id}`, {

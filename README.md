@@ -12,7 +12,7 @@
 
 ## 💻 Projeto
 
-O RentX é umn app para fazer agendamentos de carros com uma interface otimista e com implementação do conceito de Offline First.
+O RentX é umn app para fazer agendamentos de carros com uma interface otimista.
 
 ## :hammer_and_wrench: Features
 
@@ -37,11 +37,6 @@ em cada pasta separada
 
 </br>
 
-## 📄 Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
-<br />
 
 <div align="center">
   <p>Desenvolvido por João Marcos</p>
