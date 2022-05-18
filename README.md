@@ -12,7 +12,7 @@
 
 ## 💻 Projeto
 
-O RentX é umn app para fazer agendamentos de carros com uma interface otimista.
+O RentX é umn app para fazer agendamentos de carros com uma interface otimista, animações e interação com o usuário.
 
 ## :hammer_and_wrench: Features
 
@@ -23,6 +23,8 @@ O RentX é umn app para fazer agendamentos de carros com uma interface otimista.
 - [x] Expo
 - [x] Typescript
 - [x] Axios
+- [x] Lottie
+- [x] React-Native-Reanimated
 
 ## Executando o projeto
 

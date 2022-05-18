@@ -71,7 +71,7 @@ export const Splash = () => {
 
     return (
         <Styled.Container>
-            <StatusBar barStyle="light-content" />
+            <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
             <Animated.View style={[brandStyle, { position: "absolute" }]}>
                 <BrandSvg width={80} height={50} />
             </Animated.View>
