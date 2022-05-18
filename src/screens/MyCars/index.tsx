@@ -10,7 +10,7 @@ import { RootStackParamList } from "../../routes/types";
 import { AntDesign } from "@expo/vector-icons"
 import { api } from "../../services/api";
 import * as Styled from "./styles";
-import { Loading } from "../../components/Loading";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 
 type MyCarsScreenRouteProp = StackNavigationProp<RootStackParamList, 'MyCars'>;
@@ -78,7 +78,7 @@ export const MyCars = () => {
 
             {
                 isLoading
-                    ? <Loading />
+                    ? <LoadAnimation />
                     : <Styled.Content>
                         <Styled.Appointments>
                             <Styled.AppointmentTitle>Agendamentos feitos</Styled.AppointmentTitle>

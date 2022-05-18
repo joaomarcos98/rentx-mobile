@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Logo from "../../assets/logo.svg";
 import { CarCard } from '../../components/CarCard';
-import { Loading } from '../../components/Loading';
+import { LoadAnimation } from '../../components/LoadAnimation';
 import { CarDTO } from '../../dto/CarDTO';
 import { RootStackParamList } from "../../routes/types"
 import { api } from '../../services/api';
@@ -111,7 +111,7 @@ export const Home = () => {
 
             {
                 isLoading
-                    ? <Loading />
+                    ? <LoadAnimation />
                     : <Styled.CarList
                         data={cars}
                         keyExtractor={item => String(item.id)}

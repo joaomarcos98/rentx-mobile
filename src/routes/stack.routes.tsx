@@ -51,6 +51,9 @@ export const StackRoutes = () => {
             <Screen
                 name="MyCars"
                 component={MyCars}
+                options={{
+                    gestureEnabled: true
+                }}
             />
         </Navigator>
     )

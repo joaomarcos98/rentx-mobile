@@ -11,7 +11,10 @@ export const LoadAnimation = () => {
         <Styled.Container>
             <LottieView
                 source={loadingCar}
+                style={{ height: 200 }}
                 autoPlay
+                resizeMode="contain"
+                loop
             />
         </Styled.Container>
     )
