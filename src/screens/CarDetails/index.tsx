@@ -10,6 +10,9 @@ import { RootStackParamList } from '../../routes/types';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CarDTO } from '../../dto/CarDTO';
 import { getAccessoriesIcons } from '../../utils/getAccessoriesIcon';
+import Animated, { Extrapolate, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { StatusBar, StyleSheet } from 'react-native';
+import { useTheme } from 'styled-components';
 
 
 type CarDetailsScreenRouteProp = StackNavigationProp<RootStackParamList, 'CarDetails'>;
@@ -23,6 +26,36 @@ export const CarDetails = () => {
     const { navigate, goBack } = useNavigation<CarDetailsScreenRouteProp>();
     const { params } = useRoute();
 
+    const theme = useTheme();
+
+    const scrollY = useSharedValue(0);
+
+    const scrollHandler = useAnimatedScrollHandler(event => {
+        scrollY.value = event.contentOffset.y
+        console.log(event.contentOffset.y);
+    })
+
+    const headerStyleAnimation = useAnimatedStyle(() => {
+        return {
+            height: interpolate(
+                scrollY.value,
+                [0, 200],
+                [200, 80],
+                Extrapolate.CLAMP
+            )
+        }
+    });
+
+    const sliderCarsStyleAnimation = useAnimatedStyle(() => {
+        return {
+            opacity: interpolate(
+                scrollY.value,
+                [0, 150],
+                [1, 0]
+            )
+        }
+    })
+
     const { car } = params as Params;
 
     const handleConfirmRental = () => {
@@ -30,25 +63,56 @@ export const CarDetails = () => {
     }
 
     const handleGoBack = () => {
+        console.log("lala");
+        
         goBack()
     }
 
 
+
     return (
         <Styled.Container>
-            <Styled.Header>
-                <BackButton
-                    onPress={handleGoBack}
-                />
-            </Styled.Header>
+            <StatusBar
+                barStyle='dark-content'
+                translucent
+                backgroundColor="transparent"
+            />
 
-            <Styled.CarImages>
-                <ImageSlider
-                    imagesUrl={car.photos}
-                />
-            </Styled.CarImages>
+            <Animated.View
+                style={[
+                    headerStyleAnimation,
+                    styles.header,
+                    { backgroundColor: theme.colors.background_secondary }]}
+            >
+                <Styled.Header>
+                    <BackButton
+                        onPress={handleGoBack}
+                        style={styles.back}
+                    />
+                </Styled.Header>
 
-            <Styled.Content>
+                <Animated.View
+                    style={sliderCarsStyleAnimation}
+                >
+                    <Styled.CarImages>
+                        <ImageSlider
+                            imagesUrl={car.photos}
+                        />
+                    </Styled.CarImages>
+                </Animated.View>
+            </Animated.View>
+
+
+            <Animated.ScrollView
+                contentContainerStyle={{
+                    padding: 24,
+                    alignItems: "center",
+                    paddingTop: 160
+                }}
+                showsVerticalScrollIndicator={false}
+                onScroll={scrollHandler}
+                scrollEventThrottle={16}
+            >
                 <Styled.Details>
 
                     <Styled.Description>
@@ -79,7 +143,7 @@ export const CarDetails = () => {
                     {car.about}
                 </Styled.About>
 
-            </Styled.Content>
+            </Animated.ScrollView>
 
             <Styled.Footer>
                 <Button title="Escolher período do aluguel" onPress={handleConfirmRental} />
@@ -88,3 +152,15 @@ export const CarDetails = () => {
         </Styled.Container>
     );
 }
+
+const styles = StyleSheet.create({
+    header: {
+        position: "absolute",
+        overflow: "hidden",
+        zIndex: 1
+    },
+    back: {
+        marginTop: 24,
+        zIndex: 2
+    }
+})
