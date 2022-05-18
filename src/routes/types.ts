@@ -22,5 +22,8 @@ export type RootStackParamList = {
     };
     MyCars: {
         name: string
+    };
+    Splash: {
+        name: string
     }
 };
