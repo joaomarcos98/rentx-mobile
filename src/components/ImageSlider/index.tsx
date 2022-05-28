@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { FlatList, ViewToken } from 'react-native';
+import { FlatList, ListViewBase, ViewToken } from 'react-native';
 
 import * as Styled from './styles';
 
